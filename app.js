@@ -1,5 +1,5 @@
 
-let coffeeTpye = document.getElementById('coffeeTpye')
+let coffeeType = document.getElementById('coffeeType')
 let orderEmail = document.getElementById('emailAddress')
 let searchEmail = document.getElementById('searchEmail')
 let addOrderButton = document.getElementById('addOrder')
@@ -7,6 +7,8 @@ let addOrderButton = document.getElementById('addOrder')
 
 
 const ORDER_LIST = 'http://dc-coffeerun.herokuapp.com/api/coffeeorders/';
+
+
 fetch(ORDER_LIST)
 .then(function(response){
 
@@ -24,18 +26,32 @@ fetch(ORDER_LIST)
   currentOrders.innerHTML = (listItems)
 })
 
-addOrderButton.click(function(){
-  let orderEmail = $('#emailAddress').val()
-  let coffeeTpye = $('#coffeeTpye').val()
+// function displayOrder(orders){
+//   let listItems = ""
+//
+//   for (key in orders){
+//     let order = orders[key]
+//   }
+// }
 
-  fetch(ORDER_LIST, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ // converting object to string
-      emailAddress: orderEmail,
-      coffee: coffeeTpye,
+
+
+
+
+addOrderButton.addEventListener('click', function() {
+    let coffeeType = $('#coffeeType').val();
+    let orderEmail = $('#emailAddress').val();
+    console.log(coffeeType)
+    console.log(orderEmail);
+    fetch(ORDER_LIST, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            emailAddress: orderEmail,
+            coffee: coffeeType,
+        })
     })
-  })
-})
+    
+});
